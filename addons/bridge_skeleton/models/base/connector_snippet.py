@@ -143,7 +143,7 @@ class ConnectorSnippet(models.TransientModel):
 					return (code + str(i))[-5:]
 		return code
 
-   	@api.model
+	@api.model
 	def create_payment_method(self, data):
 		"""create Journal by any webservice like xmlrpc.
 		@param name: journal name.
