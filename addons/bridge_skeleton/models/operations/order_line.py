@@ -39,7 +39,9 @@ class WkSkeleton(models.TransientModel):
         ctx = dict(self._context or {})
         instance_id = ctx.get('instance_id', False)
         order_line['product_id'] = self.get_default_virtual_product_id(order_line, instance_id)
-        if order_line.get('name', '').startswith('S'):
+        name = order_line.get('name', '')
+        name = _unescape(name) if name else name
+        if name.startswith('S'):
             order_line['is_delivery'] = True
         order_line.pop('ecommerce_channel', None)
         res = self.create_sale_order_line(order_line)
@@ -73,9 +75,10 @@ class WkSkeleton(models.TransientModel):
             if odoo_product_obj:
                 odoo_product_id = odoo_product_obj.id
             else:
+                name = order_line.get('name', 'Voucher')
                 odoo_product_id = self.env['product.product'].create({
                     'sale_ok' : False,
-                    'name' : order_line.get('name', 'Voucher'),
+                    'name' : name,
                     'type' : 'service',
                     'list_price' : 0.0,
                     'description': 'Service Type product used by Magento Odoo Bridge for Gift Voucher Purposes'

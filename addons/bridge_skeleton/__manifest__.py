@@ -16,7 +16,7 @@
 
 {
     'name': 'Odoo: Bridge Skeleton',
-    'version': '4.0.1',
+    'version': '4.0.2',
     'category': 'Bridge Module',
     'author': 'Webkul Software Pvt. Ltd.',
     'website': 'https://store.webkul.com/Magento-OpenERP-Bridge.html',
